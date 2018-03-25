@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Mar 5, 2018 8:44:22 PM                                                        
+
+     HuangsHotelResrvationSystem
+                   
+     Zhijie Huang                                                                
+     ====================================================================== -->
+<project name="MSSE670_Java_Software_Development" basedir = ".">
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="bin.dir" value="${basedir}/bin"/>
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="config.dir" value="${basedir}/config"/>
+	<property name=".dir" value="${basedir}/bin"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
+	
+	 <!-- Classpath for the project -->	
+	 <path id="master-classpath">
+	   <fileset dir="${lib.dir}">
+	     <include name="**/*.jar"/>
+	   </fileset>
+	 </path>
+
+    <!-- Cleanup and Dir Creation -->
+    <target name="clean" description="Delete old classes and
+    	creates new classes, and build directories.">
+    	<delete dir="${bin.dir}"/>
+     <mkdir dir = "${bin.dir}"/>
+    	<delete dir="${build.dir}"/>
+     <mkdir dir = "${build.dir}"/>
+    </target>
+
+	<!--Compiling Code-->
+		<target name = "compile" description="Compile code" depends="clean">
+	<javac srcdir = "{src.dir}"
+		destdir = "${bin.dir}">
+	</javac>
+		</target>
+	
+	<!--Build Jar-->
+		<target name = "buildjar" depends="compile">
+			<jar jarfile="${build.dir}/HuangsHotel.jar">
+				<fileset dir = "${basedir}">
+					<include name = "config/*"/>
+				</fileset>
+				<fileset dir = "${bin.dir}">
+					<include name = "**/*.class"/>
+				</fileset>
+				<manifest>
+					<attribute name="Main-Class" value="com.huangshotelreservation.presentation.MainUI"/>
+				</manifest>
+			</jar>
+			
+	<!--Copy the config folder over to the build folder:
+		application will load properties file.-->
+			<copy todir="${build.dir}">
+				<fileset dir = "${basedir}">
+					<include name="config*/**/*"/>
+				</fileset>
+			</copy>
+			
+		</target>
+	
+	<!--Execute jar-->
+		<target name="testjar" depends="buildjar">
+			<java jar="${build.dir}/HuangsHotel.jar" fork="yes" dir = ".">
+			</java>
+		</target>
+</project>

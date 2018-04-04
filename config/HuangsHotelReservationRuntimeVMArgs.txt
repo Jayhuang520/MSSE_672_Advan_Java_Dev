@@ -1,0 +1,1 @@
+-Dlog4j_prop_location=D:\OneDrive\Documents\NetBeansProjects\MSSE_672_Advan_Java_Dev\config\log4j.properties -DpropLocation=D:\OneDrive\Documents\NetBeansProjects\MSSE_672_Advan_Java_Dev\config\application.properties

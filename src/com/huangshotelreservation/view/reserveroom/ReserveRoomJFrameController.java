@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import com.huangshotelreservation.model.business.manager.HuangsHotelReservationManager;
+import com.huangshotelreservation.model.business.manager.DAOManager;
 import com.huangshotelreservation.model.domain.City;
 import com.huangshotelreservation.model.domain.ReserveRoom;
 import com.huangshotelreservation.model.domain.Room;
@@ -51,7 +51,7 @@ public class ReserveRoomJFrameController implements ActionListener{
 		log.info("Customer wants to reserved the room!");
 		ReserveRoom reserveRoom = ReserveRoomJFrame.getSelectedData();
 		
-		HuangsHotelReservationManager huangsHotelReservationManager = HuangsHotelReservationManager.getInstance();
+		DAOManager huangsHotelReservationManager = DAOManager.getInstance();
 
 		if(huangsHotelReservationManager != null) {
 

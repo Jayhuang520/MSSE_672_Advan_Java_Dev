@@ -2,7 +2,7 @@ package com.huangshotelreservation.model.business.manager;
 
 import java.util.ArrayList;
 
-import com.huangshotelreservation.model.business.manager.HuangsHotelReservationManager;
+import com.huangshotelreservation.model.business.manager.DAOManager;
 import com.huangshotelreservation.model.domain.City;
 import com.huangshotelreservation.model.domain.ReserveRoom;
 import com.huangshotelreservation.model.domain.Room;
@@ -20,14 +20,14 @@ import junit.framework.TestCase;
  */
 public class HuangsHotelReservationManagerTest extends TestCase{
 
-	private HuangsHotelReservationManager huangsHotelReservationManager;
+	private DAOManager huangsHotelReservationManager;
 	ArrayList<Room> availableRoom = null;
 	private ReserveRoom reserveRoom;
 	
 	protected void setUp() throws Exception{
 		super.setUp();
 		
-		huangsHotelReservationManager = HuangsHotelReservationManager.getInstance();
+		huangsHotelReservationManager = DAOManager.getInstance();
 		
 		availableRoom = new ArrayList<Room>(2);
 		availableRoom.add(Room.DOUBLE);

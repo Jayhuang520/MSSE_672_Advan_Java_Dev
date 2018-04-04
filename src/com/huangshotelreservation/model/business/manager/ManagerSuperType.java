@@ -3,7 +3,7 @@ package com.huangshotelreservation.model.business.manager;
 import java.util.ArrayList;
 
 import com.huangshotelreservation.model.business.exception.PropertyFileNotFoundException;
-import static com.huangshotelreservation.model.business.manager.HuangsHotelReservationManager.log;
+import static com.huangshotelreservation.model.business.manager.DAOManager.log;
 import com.huangshotelreservation.model.domain.City;
 import com.huangshotelreservation.model.domain.ReserveRoom;
 import com.huangshotelreservation.model.domain.Room;

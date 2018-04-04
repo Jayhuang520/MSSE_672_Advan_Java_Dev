@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import com.huangshotelreservation.model.business.manager.HuangsHotelReservationManager;
+import com.huangshotelreservation.model.business.manager.DAOManager;
 import com.huangshotelreservation.model.domain.City;
 import com.huangshotelreservation.model.domain.ReserveRoom;
 import com.huangshotelreservation.model.domain.Room;
@@ -68,7 +68,7 @@ public class SeeGalleryJFrameController
 		log.info("Customer wants to see the Gallery of the room!");
 		ArrayList<Room> availableRoom = seeGalleryJFrame.getSelectedData();
 		
-		HuangsHotelReservationManager huangsHotelReservationManager = HuangsHotelReservationManager.getInstance();
+		DAOManager huangsHotelReservationManager = DAOManager.getInstance();
 		
 		if(huangsHotelReservationManager != null) {
 			String commandString;

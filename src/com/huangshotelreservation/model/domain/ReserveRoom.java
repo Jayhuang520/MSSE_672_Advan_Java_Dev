@@ -26,6 +26,8 @@ public class ReserveRoom implements Serializable{
 	 * @param month
 	 * @param day
 	 * @param year
+     * @param duration
+     * @param room
 	 */
 	public ReserveRoom(boolean available,int month,int day,int year,int duration,Room room) {
 		this.setAvailable(available);
@@ -33,6 +35,7 @@ public class ReserveRoom implements Serializable{
 		this.setDay(day);
 		this.setYear(year);
 		this.setDuration(duration);
+                this.setRoom(room);
 	}
 
 	/**

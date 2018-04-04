@@ -23,16 +23,16 @@ import org.apache.log4j.Logger;
  *
  */
 
-public class HuangsHotelReservationManager extends ManagerSuperType{
+public class DAOManager extends ManagerSuperType{
     
     static Logger log = Logger.getLogger("com.huangshotelreservation");
 
-	public static HuangsHotelReservationManager _instance;
+	public static DAOManager _instance;
 	
 	/**
 	 * keep the constructor private to prevent instantiation by outside callers.
 	 */
-	private HuangsHotelReservationManager() {
+	private DAOManager() {
 		//construct object.
 	}
 	
@@ -40,9 +40,9 @@ public class HuangsHotelReservationManager extends ManagerSuperType{
 	 *  Assures that there is only one HuangsHotelReservationManager created.
 	 * @return HuangsHotelReservationManager instance
 	 */
-	public static synchronized HuangsHotelReservationManager getInstance() {
+	public static synchronized DAOManager getInstance() {
 		if(_instance == null) {
-			_instance = new HuangsHotelReservationManager();
+			_instance = new DAOManager();
 		}
 		return _instance;
 	}

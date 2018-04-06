@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author JayHu
+ * @author Zhijie Huang
  */
 public class TestDriver {
     /*

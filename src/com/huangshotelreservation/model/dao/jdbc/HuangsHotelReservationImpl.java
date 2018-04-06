@@ -68,7 +68,13 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
                 log.info("-------------------------------");
                 log.info ("Inside Get Available Rentals");
                 
-                AvailableRoom availableRoom = fetchAvailableRooms();
+                AvailableRoom availableRoom = null;
+        try {
+            availableRoom = fetchAvailableRooms();
+        } catch (SQLException ex) {
+            log.error("An error occured when trying to get the "
+                        +"available rentals",ex);
+        }
                 
                 if(availableRoom != null){
                     //indicate that rentals are available for customer statment
@@ -91,7 +97,7 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
      * @return availableRoom
      * @throws SQLException 
      */
-    private AvailableRoom fetchAvailableRooms()  {
+    private AvailableRoom fetchAvailableRooms() throws SQLException  {
         AvailableRoom availableRoom = null;
         ResultSet rset = null;
         Statement stmt = null;
@@ -133,6 +139,16 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
                 
             } catch(SQLException e){
                 log.error(e.getClass()+": "+e.getMessage(),e);
+            }finally{
+                /*Adding a finally block after the try to close connection
+                * This will prevent resources not being released when there
+                * is an exception happened during the close connection operation.
+                * If the connection already closed, closing the statement
+                * and statement again will do nothing.
+                */
+                
+                stmt.close();
+                conn.close();
             }
         }
         return availableRoom;
@@ -185,12 +201,17 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
             log.info("-------------------------------");
             log.info("\n Inside of reserveRentalRoom!!!");
             
+        try {
             status = removeSelectedRoom(reserveroom);
+        } catch (SQLException ex) {
+            log.error("There is an error when trying to remove the reserved"
+                        +"rooms out of the database",ex);
+        }
             
             return status;
         }
 
-    private boolean removeSelectedRoom(ReserveRoom reserveroom) {
+    private boolean removeSelectedRoom(ReserveRoom reserveroom) throws SQLException {
         
         boolean status = false;
         
@@ -211,16 +232,8 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
                 String deleteSQL = "DELETE FROM rooms WHERE bed_type = ?";
                 
                 PreparedStatement prestat = conn.prepareStatement(deleteSQL);
-                //prestat.setString(1,"DOUBLE");
                 prestat.setString(1,reserveroom.getRoom().toString());
                 prestat.executeUpdate();
-                
-               
-                //create a statement
-                //stmt = conn.createStatement();
-                //String deleteSQL;
-                //deleteSQL = "DELETE FROM rooms WHERE bed_type = 'DOUBLE'";
-                //rset = stmt.executeQuery(deleteSQL);
                 status = true;
                 
                 
@@ -242,6 +255,16 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
                 
             } catch(SQLException e){
                 log.error(e.getClass()+": "+e.getMessage(),e);
+            }finally{
+                /*Adding a finally block after the try to close connection
+                * This will prevent resources not being released when there
+                * is an exception happened during the close connection operation.
+                * If the connection already closed, closing the statement
+                * and statement again will do nothing.
+                */
+                
+                stmt.close();
+                conn.close();
             }
         }
         return status;

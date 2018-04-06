@@ -7,3 +7,10 @@
 3. Edit bin\mysetenv.cmd and update the environment.
 3. run bin\mysetenv.cmd
 4. run the TestDriver: ant runTestDriver
+
+
+D:\Downloads\FleetRentalLog4jSample\SupplementalAndSample\Hibernate\Sample\FleetRentalHibernateDAOSample\lib\mysql-connector-java-5.1.13-bin.jar
+
+-Dprop_location=D:\Downloads\FleetRentalLog4jSample\SupplementalAndSample\Hibernate\Sample\FleetRentalHibernateDAOSample\config\application.properties
+
+-Dprop_location=D:\Downloads\FleetRentalLog4jSample\SupplementalAndSample\Hibernate\Sample\FleetRentalHibernateDAOSample\config\application.properties

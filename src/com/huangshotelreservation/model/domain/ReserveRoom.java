@@ -1,6 +1,17 @@
 package com.huangshotelreservation.model.domain;
 
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 public class ReserveRoom implements Serializable{
 
@@ -104,7 +115,7 @@ public class ReserveRoom implements Serializable{
 
 	/**
 	 * 
-	 * @return room tyoe
+	 * @return room type
 	 */
 	public Room getRoom() {
 		return room;

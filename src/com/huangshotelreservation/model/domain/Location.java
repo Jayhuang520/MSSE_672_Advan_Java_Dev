@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.huangshotelreservation.model.domain;
 
 import java.util.HashSet;
@@ -42,7 +37,6 @@ public class Location implements java.io.Serializable{
      *
      */
     private Set<Room> roomSet = new HashSet<>(0);
-    private Integer locaitonId;
     
     public Location(){
     }
@@ -55,11 +49,11 @@ public class Location implements java.io.Serializable{
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idLOCATION", unique = true, nullable = false)
     public Integer getLocationId() {
-        return this.locaitonId;
+        return this.locationId;
     }
 
     public void setLocaitonId(Integer locationId) {
-        this.locaitonId = locationId;
+        this.locationId = locationId;
     }
     
     @Column(name = "CITY", length = 20)
@@ -78,6 +72,10 @@ public class Location implements java.io.Serializable{
 
     public void setRoomSet(Set<Room> roomsSet) {
         this.roomSet = roomsSet;
+    }
+    
+    public void addRoom(ReserveRoom reserveroom){
+        reserveroom.setLocation(this);
     }
     
 }

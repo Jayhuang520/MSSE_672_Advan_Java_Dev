@@ -1,18 +1,10 @@
 package com.huangshotelreservation.model.domain;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+/**
+ * 
+ * @author Zhijie Huang
+ */
 public class ReserveRoom implements Serializable{
 
 	/**
@@ -26,12 +18,13 @@ public class ReserveRoom implements Serializable{
 	private int year;
 	private int duration;
 	private Room room;
-	
-	//Empty constructor
+      
+
+        //Empty constructor
 	public ReserveRoom() {
 	}
-	
-	/**
+
+        /**
 	 * 
 	 * @param available
 	 * @param month
@@ -144,7 +137,8 @@ public class ReserveRoom implements Serializable{
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	
+        
+   	
 	@Override
 	public String toString() {
 		StringBuffer strBuffer = new StringBuffer();
@@ -159,4 +153,5 @@ public class ReserveRoom implements Serializable{
 		return strBuffer.toString();
 		
 	}
+
 }

@@ -1,6 +1,8 @@
 
 package com.huangshotelreservation.driver;
 
+import com.huangshotelreservation.model.domain.City;
+import com.huangshotelreservation.model.domain.Hotel;
 import com.huangshotelreservation.model.domain.Location;
 import com.huangshotelreservation.model.domain.ReserveRoom;
 import com.huangshotelreservation.model.domain.Room;
@@ -43,38 +45,66 @@ public class HibernateDriver {
             log.info("---------------------------");
             log.info("Creating a couple of Rooms and adding"
                     +"to a locaiton.");
-            ReserveRoom reserveRoom1 = new ReserveRoom(true,1,1,2018,1,Room.QUEEN);
-            ReserveRoom reserveRoom2 = new ReserveRoom(true,1,1,2018,1,Room.KING);
-            ReserveRoom reserveRoom3 = new ReserveRoom(true,1,1,2018,1,Room.DOUBLE);
+           
+            
+            Hotel hotel1 = new Hotel(500.00f,Room.DOUBLE,City.DENVER);
+            Hotel hotel2 = new Hotel(1000.00f,Room.QUEEN,City.DENVER);
+            Hotel hotel3 = new Hotel(1500.00f,Room.KING,City.DENVER);
             
             Location location = new Location("DENVER");
             
-            log.info("About to save the created Cars and its Location!");
+            location.addRoom(hotel1);
+            location.addRoom(hotel2);
+            location.addRoom(hotel3);
+            
+             log.info("About to save the created Rooms and its Location!");
             session.save(location);
             tx.commit();
             log.info("Location with its Rooms saved. Check database for data!");
             log.info("---------------------------");
-            
-            // Lets retrieve all the cars at DENVER Location
+
+            // Lets retrieve all the rooms at DENVER Location
             log.info("---------------------------");
-            log.info("About to retrieve all rooms at DENVER Location!");
+            log.info("About to retrieve all rooms at Devnver Location!");
 
             log.info("About to create Query");
-            
             /**
              * Note: The reference to Location in the query is the object
              * Location not the table location
              */
             Query q = session.createQuery("from Location l where l.locationId = 1");
-            q.setString("rented", "N");
-            
+
             log.info("About to display the queried list");
-            List roomList = q.list();
-            for(Object o:roomList){
-                log.info((Room) o);
-            }
-            log.info("---------------------------");
+
+            List locList = q.list();
             
+            for (Object o : locList) {
+                log.info((Location) o);
+            }
+            
+            log.info("---------------------------");
+
+            // Lets retrieve all the rooms at San DENVER Location which are not rented
+            log.info("---------------------------");
+            log.info("About to retrieve all ROOMs at Denver Location that are not rented!");
+
+            log.info("About to create Query");
+            /**
+             * Note: The reference to Location in the query is the object
+             * Location not the table location
+             */
+            
+            q = session.createQuery("select room from Location l join l.hotelRoomSet room where room.rented= :rented ");
+            q.setString("rented", "N");
+          
+            log.info("About to display the queried list");
+                   
+            List roomList = q.list();
+            for (Object o : roomList) {
+                log.info((Hotel) o);
+            }
+            
+            log.info("---------------------------");
         }catch(Exception e){
             if (tx != null) {
                 tx.rollback();

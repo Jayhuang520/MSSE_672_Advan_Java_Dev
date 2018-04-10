@@ -40,6 +40,7 @@ public abstract class ManagerSuperType {
 	 * @param availableRoomList
 	 * @param city
 	 * @param room
+         * @param reserveRoom
 	 * @return 
 	 * 			false 
 	 * 				 if action failed
@@ -49,7 +50,7 @@ public abstract class ManagerSuperType {
 	 */
 	
 	public abstract boolean performAction(String commandString,
-			ArrayList<Room> availableRoomList,City city,Room room,ReserveRoom reserveRoom);
+    			ArrayList<Room> availableRoomList,City city,Room room,ReserveRoom reserveRoom);
 
 	/**
 	 * Loads the property file into memory.
@@ -70,12 +71,17 @@ public abstract class ManagerSuperType {
 		
 		
 		log.info("--------->Inside ManagerSuperType: load Properties\n");
-		
-		String propertyFileLocaiton = "config\\application.properties";
-		
-		//Load the property file locaiton:
-		PropertyManager.loadProperties(propertyFileLocaiton);
-		
+				
+                String propertyFileLocation = System.getProperty("propLocation");
+                
+                if(propertyFileLocation!=null){
+                    //Load the property file locaiton:
+                    PropertyManager.loadProperties(propertyFileLocation);
+                }else
+                {
+                    log.error("Property file location not set. Passed in value is: " + propertyFileLocation + ".");
+                    throw new PropertyFileNotFoundException ("Property file location not set", null);         
+                }
 		
 	}// end loadProperties
 	

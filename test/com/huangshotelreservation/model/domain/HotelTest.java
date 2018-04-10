@@ -51,11 +51,4 @@ public class HotelTest extends TestCase{
 		assertFalse(hotel1.equals(hotel2));
 		System.out.println("Hotel1 not equals to Hotel2,test PASSED!!");
 	}
-	public void testNotEquals2() {
-		System.out.println("Start testing test NotEquals2");
-		Hotel hotel1 = new Hotel(2.44f,Room.SINGLE,City.DENVER);
-		Hotel hotel2 = new Hotel(2.44f,Room.DOUBLE,City.DENVER);
-		assertFalse(hotel1.equals(hotel2));
-		System.out.println("Hotel1 not equals to Hotel2,test PASSED!!");
-	}
-}
+}	

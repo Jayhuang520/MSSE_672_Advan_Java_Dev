@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 
+NOTE:   
+We are using the annotations approach and hence no need to use the domain 
+hibernate mapping files. Provided here as merely a refrence.
+-->
+<hibernate-mapping default-lazy="false">
+    <class name="com.huangshotelreservation.model.domain.ReserveRoom" table="rooms" catalog="regis">
+        <id name="roomId" type="java.lang.Integer">
+            <column name="idrooms" />
+            <generator class="increment"></generator>            
+        </id>
+        <many-to-one name="location" class="com.huangshotelreservation.model.domain.Location" fetch="select">
+            <column name="LOCATION_FK" not-null="true" />
+        </many-to-one>
+        <property name="bed_Type" type="java.lang.String">
+            <column name="bed_type" length="20" />
+        </property>
+        <property name="rate" type="java.lang.Float">
+            <column name="rate" precision="12" scale="0" />
+        </property>
+        <property name="rented" type="java.lang.String">
+            <column name="rented" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

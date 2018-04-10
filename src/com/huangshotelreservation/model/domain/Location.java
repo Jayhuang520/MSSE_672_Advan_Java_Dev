@@ -15,11 +15,12 @@ import javax.persistence.Table;
  *
  * @author Zhijie Huang
  */
+
 @Entity
 @Table(name = "location")
 public class Location implements java.io.Serializable{
 
-    /**
+     /**
      * To uniquely identify this location.
      */
     
@@ -31,32 +32,33 @@ public class Location implements java.io.Serializable{
     private String city;
     
      /**
-     * Holds the cars that are available in this location As part of the
+     * Holds the rooms that are available in this location As part of the
      * Hibernate mapping that there are one-to-many association between a
-     * Location and a Car.
+     * Location and a Room.
      *
      */
-    private Set<Room> roomSet = new HashSet<>(0);
-    
+    private Set<Hotel> hotelRoomSet = new HashSet<>(0);
+   
     public Location(){
     }
 
-    public Location(String denver) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Location(String city) {
+        this.city = city;
     }
 
-    @Id
+       @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "idLOCATION", unique = true, nullable = false)
     public Integer getLocationId() {
-        return this.locationId;
+        return locationId;
     }
 
-    public void setLocaitonId(Integer locationId) {
+    public void setLocationId(Integer locationId) {
         this.locationId = locationId;
     }
+
     
-    @Column(name = "CITY", length = 20)
+    @Column(name="CITY",length=20)
     public String getCity() {
         return this.city;
     }
@@ -66,16 +68,33 @@ public class Location implements java.io.Serializable{
     }
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
-    public Set<Room> getRoomSet() {
-        return roomSet;
+    public Set<Hotel> getHotelRoomSet() {
+        return hotelRoomSet;
     }
 
-    public void setRoomSet(Set<Room> roomsSet) {
-        this.roomSet = roomsSet;
+    public void setHotelRoomSet(Set<Hotel> hotelRoomSet) {
+        this.hotelRoomSet = hotelRoomSet;
+    }
+ 
+        
+    
+    public void addRoom(Hotel hotel){
+        hotel.setLocation(this);
+        hotelRoomSet.add(hotel);
     }
     
-    public void addRoom(ReserveRoom reserveroom){
-        reserveroom.setLocation(this);
+    public String toString() {
+	StringBuffer buffer = new StringBuffer();
+	buffer.append("\n\nLocation[");
+	buffer.append("\t\ncity = ").append(city);
+	buffer.append("\t\nlocationId = ").append(locationId);
+	for (Hotel h : hotelRoomSet)
+	{
+		buffer.append(h);
+	}
+	buffer.append("\t\n]");
+			
+	 return buffer.toString();
     }
     
 }

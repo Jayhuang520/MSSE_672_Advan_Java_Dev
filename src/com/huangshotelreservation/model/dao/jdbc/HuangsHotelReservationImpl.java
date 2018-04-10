@@ -139,17 +139,21 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
                 
             } catch(SQLException e){
                 log.error(e.getClass()+": "+e.getMessage(),e);
-            }finally{
-                /*Adding a finally block after the try to close connection
-                * This will prevent resources not being released when there
-                * is an exception happened during the close connection operation.
-                * If the connection already closed, closing the statement
-                * and statement again will do nothing.
-                */
+            }
+            /* Added finally block to close all connection, however,
+            it gives me error.
+            
+            finally{
+                Adding a finally block after the try to close connection
+                 This will prevent resources not being released when there
+                 is an exception happened during the close connection operation.
+                 If the connection already closed, closing the statement
+                 and statement again will do nothing.
+                
                 
                 stmt.close();
                 conn.close();
-            }
+            }*/
         }
         return availableRoom;
     }//end of fetchavailableroom
@@ -255,17 +259,20 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
                 
             } catch(SQLException e){
                 log.error(e.getClass()+": "+e.getMessage(),e);
-            }finally{
+            }
+            /*
+            finally{
                 /*Adding a finally block after the try to close connection
                 * This will prevent resources not being released when there
                 * is an exception happened during the close connection operation.
                 * If the connection already closed, closing the statement
                 * and statement again will do nothing.
                 */
-                
+              /*  
                 stmt.close();
                 conn.close();
             }
+            */
         }
         return status;
     }

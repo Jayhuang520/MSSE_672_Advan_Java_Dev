@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /**
  *
@@ -25,12 +26,21 @@ public class HibernateSessionFactory {
     /**
      * Holds a single instance of Session
      */
+    // In NetBeans, it is copied to the classes folder and hence can be
+    // found without having to refer to the config folder
+    private static String CONFIG_FILE_LOCATION = "hibernate.cfg.xml";
+    
     private static final ThreadLocal threadLocal = new ThreadLocal();
 
     /**
      * The single instance of hibernate SessionFactory
      */
     private static org.hibernate.SessionFactory sessionFactory;
+    
+    private static ServiceRegistry  serviceRegistry;
+    
+    /** The single instance of hibernate configuration */
+    private static final Configuration cfg = new Configuration();
     
     /**
      * Returns the ThreadLocal Session instance. Lazy initialize the
@@ -44,8 +54,9 @@ public class HibernateSessionFactory {
         
         if(session == null || !session.isOpen()){
             try{
-                sessionFactory = new Configuration()
-                        .configure().buildSessionFactory();
+                cfg.configure(CONFIG_FILE_LOCATION);
+		// NOTE: buildSessionFactory() is deprecated in Hibernate 4.1.X
+		sessionFactory = cfg.buildSessionFactory();
                 
             }catch(Exception e){
                log.error("%%%% Error Creating SessionFactory %%%%",e);

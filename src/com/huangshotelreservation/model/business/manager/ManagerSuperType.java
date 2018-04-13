@@ -7,7 +7,8 @@ import static com.huangshotelreservation.model.business.manager.DAOManager.log;
 import com.huangshotelreservation.model.domain.City;
 import com.huangshotelreservation.model.domain.ReserveRoom;
 import com.huangshotelreservation.model.domain.Room;
-import com.huangshotelreservation.model.services.manager.PropertyManager;
+import com.huangshotelreservation.model.services.manager.SAXPropertyManager;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -22,6 +23,11 @@ public abstract class ManagerSuperType {
 	 * This get executed at the time when the class that contains it or extends it\
 	 * referenced.
 	 */
+    // By making the application Manager be aware of the property file used
+	 // in the application, this allows the Factory to just deal
+	 // with the application manager and not be aware of the property manager
+	 private static SAXPropertyManager saxPropertyManager;
+    
     static Logger log = Logger.getLogger("com.huangshotelreservation");
 	static
 	{
@@ -76,7 +82,8 @@ public abstract class ManagerSuperType {
                 
                 if(propertyFileLocation!=null){
                     //Load the property file locaiton:
-                    PropertyManager.loadProperties(propertyFileLocation);
+                    saxPropertyManager = new SAXPropertyManager();
+                    saxPropertyManager.loadProperties(propertyFileLocation);
                 }else
                 {
                     log.error("Property file location not set. Passed in value is: " + propertyFileLocation + ".");

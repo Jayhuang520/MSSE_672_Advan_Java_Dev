@@ -7,7 +7,8 @@ package com.huangshotelreservation.model.services.factory;
 
 import com.huangshotelreservation.model.services.exception.DaoLoadException;
 import com.huangshotelreservation.model.dao.IHuangsHotelDao;
-import com.huangshotelreservation.model.services.manager.PropertyManager;
+import com.huangshotelreservation.model.services.manager.SAXPropertyManager;
+
 
 /**
  *
@@ -24,7 +25,7 @@ public class DAOFactory {
 		// and assign (reuse) to serviceString
 		//
 		// This property value is set in config/application.properties
-		String daoImplString = PropertyManager.
+		String daoImplString = SAXPropertyManager.
                             getPropertyValue("IHuangsHotelDao");
 
         	// using the fully qualified service name,

@@ -11,7 +11,8 @@ import com.huangshotelreservation.model.domain.City;
 import com.huangshotelreservation.model.domain.Hotel;
 import com.huangshotelreservation.model.domain.ReserveRoom;
 import com.huangshotelreservation.model.domain.Room;
-import com.huangshotelreservation.model.services.manager.PropertyManager;
+import com.huangshotelreservation.model.services.manager.SAXPropertyManager;
+
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -39,9 +40,9 @@ public class HuangsHotelReservationImpl implements IHuangsHotelDao {
 	 Values come out of the ...JDBCDAOSample\config\application.properties
 	 file
 	*/
-        String url = PropertyManager.getPropertyValue("jdbc.url");
-        String userid = PropertyManager.getPropertyValue("jdbc.user");
-        String password = PropertyManager.getPropertyValue("jdbc.password");
+        String url = SAXPropertyManager.getPropertyValue("jdbc.url");
+        String userid = SAXPropertyManager.getPropertyValue("jdbc.user");
+        String password = SAXPropertyManager.getPropertyValue("jdbc.password");
         
         //load and register JDBC driver then connect to database
         

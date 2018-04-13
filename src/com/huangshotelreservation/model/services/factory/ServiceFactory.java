@@ -2,7 +2,8 @@ package com.huangshotelreservation.model.services.factory;
 
 import com.huangshotelreservation.model.business.exception.ServiceLoadException;
 import com.huangshotelreservation.model.services.IService;
-import com.huangshotelreservation.model.services.manager.PropertyManager;
+import com.huangshotelreservation.model.services.manager.SAXPropertyManager;
+
 
 /**
  * 
@@ -69,7 +70,7 @@ public class ServiceFactory
 	*/
 	
 	private String getImplName(String serviceName) throws Exception{
-		return PropertyManager.getPropertyValue(serviceName);
+		return SAXPropertyManager.getPropertyValue(serviceName);
 	}
 	
 }//end Service Factory
